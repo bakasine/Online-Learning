@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uerax.learning.mapper.CourceMapper">
+  <resultMap id="BaseResultMap" type="com.uerax.learning.domain.Cource">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="classify" jdbcType="VARCHAR" property="classify" />
+    <result column="sub_classify" jdbcType="VARCHAR" property="subClassify" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="free" jdbcType="BIT" property="free" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="create_day" jdbcType="TIMESTAMP" property="createDay" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, classify, sub_classify, creater, free, price, introduce, create_day
+  </sql>
+  <select id="selectByExample" parameterType="com.uerax.learning.domain.CourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_cource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_cource
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_cource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uerax.learning.domain.CourceExample">
+    delete from t_cource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uerax.learning.domain.Cource">
+    insert into t_cource (id, name, classify, 
+      sub_classify, creater, free, 
+      price, introduce, create_day
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{classify,jdbcType=VARCHAR}, 
+      #{subClassify,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{free,jdbcType=BIT}, 
+      #{price,jdbcType=INTEGER}, #{introduce,jdbcType=VARCHAR}, #{createDay,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uerax.learning.domain.Cource">
+    insert into t_cource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="classify != null">
+        classify,
+      </if>
+      <if test="subClassify != null">
+        sub_classify,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="free != null">
+        free,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="createDay != null">
+        create_day,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classify != null">
+        #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="subClassify != null">
+        #{subClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="free != null">
+        #{free,jdbcType=BIT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createDay != null">
+        #{createDay,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uerax.learning.domain.CourceExample" resultType="java.lang.Long">
+    select count(*) from t_cource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_cource
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classify != null">
+        classify = #{record.classify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subClassify != null">
+        sub_classify = #{record.subClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null">
+        creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.free != null">
+        free = #{record.free,jdbcType=BIT},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.introduce != null">
+        introduce = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDay != null">
+        create_day = #{record.createDay,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_cource
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      classify = #{record.classify,jdbcType=VARCHAR},
+      sub_classify = #{record.subClassify,jdbcType=VARCHAR},
+      creater = #{record.creater,jdbcType=VARCHAR},
+      free = #{record.free,jdbcType=BIT},
+      price = #{record.price,jdbcType=INTEGER},
+      introduce = #{record.introduce,jdbcType=VARCHAR},
+      create_day = #{record.createDay,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uerax.learning.domain.Cource">
+    update t_cource
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classify != null">
+        classify = #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="subClassify != null">
+        sub_classify = #{subClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="free != null">
+        free = #{free,jdbcType=BIT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createDay != null">
+        create_day = #{createDay,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uerax.learning.domain.Cource">
+    update t_cource
+    set name = #{name,jdbcType=VARCHAR},
+      classify = #{classify,jdbcType=VARCHAR},
+      sub_classify = #{subClassify,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      free = #{free,jdbcType=BIT},
+      price = #{price,jdbcType=INTEGER},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      create_day = #{createDay,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

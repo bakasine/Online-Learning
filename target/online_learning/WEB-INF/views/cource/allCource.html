@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:context="${#request.getContextPath()}">
+    <meta name="courceId" th:context="${courceId}">
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <script th:src="@{/static/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/main.css}">
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <script th:src="@{/static/js/cource/allCource.js}"></script>
+    <title>全部课程</title>
+</head>
+<body>
+<div th:replace="commons/header :: navbar"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <select name="classify" id="courceClassify" class="form-control">
+                <option value="fe">前端</option>
+                <option value="be">后端</option>
+                <option value="db">数据库</option>
+                <option value="mb">移动开发</option>
+            </select>
+        </div>
+    </div>
+    <div class="row" id="all-cource">
+
+    </div>
+</div>
+</body>
+</html>

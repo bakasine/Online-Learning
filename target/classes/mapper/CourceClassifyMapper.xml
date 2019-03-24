@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uerax.learning.mapper.CourceClassifyMapper">
+  <resultMap id="BaseResultMap" type="com.uerax.learning.domain.CourceClassify">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cource_name" jdbcType="VARCHAR" property="courceName" />
+    <result column="cource_code" jdbcType="VARCHAR" property="courceCode" />
+    <result column="parent_code" jdbcType="VARCHAR" property="parentCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cource_name, cource_code, parent_code
+  </sql>
+  <select id="selectByExample" parameterType="com.uerax.learning.domain.CourceClassifyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_cource_classify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="getByParentCode" parameterType="String" resultMap="BaseResultMap">
+    select * from t_cource_classify where parent_code = #{parentCode,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_cource_classify
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_cource_classify
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.uerax.learning.domain.CourceClassifyExample">
+    delete from t_cource_classify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.uerax.learning.domain.CourceClassify">
+    insert into t_cource_classify (id, cource_name, cource_code, 
+      parent_code)
+    values (#{id,jdbcType=INTEGER}, #{courceName,jdbcType=VARCHAR}, #{courceCode,jdbcType=VARCHAR}, 
+      #{parentCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uerax.learning.domain.CourceClassify">
+    insert into t_cource_classify
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="courceName != null">
+        cource_name,
+      </if>
+      <if test="courceCode != null">
+        cource_code,
+      </if>
+      <if test="parentCode != null">
+        parent_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courceName != null">
+        #{courceName,jdbcType=VARCHAR},
+      </if>
+      <if test="courceCode != null">
+        #{courceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.uerax.learning.domain.CourceClassifyExample" resultType="java.lang.Long">
+    select count(*) from t_cource_classify
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_cource_classify
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.courceName != null">
+        cource_name = #{record.courceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courceCode != null">
+        cource_code = #{record.courceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentCode != null">
+        parent_code = #{record.parentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_cource_classify
+    set id = #{record.id,jdbcType=INTEGER},
+      cource_name = #{record.courceName,jdbcType=VARCHAR},
+      cource_code = #{record.courceCode,jdbcType=VARCHAR},
+      parent_code = #{record.parentCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uerax.learning.domain.CourceClassify">
+    update t_cource_classify
+    <set>
+      <if test="courceName != null">
+        cource_name = #{courceName,jdbcType=VARCHAR},
+      </if>
+      <if test="courceCode != null">
+        cource_code = #{courceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        parent_code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uerax.learning.domain.CourceClassify">
+    update t_cource_classify
+    set cource_name = #{courceName,jdbcType=VARCHAR},
+      cource_code = #{courceCode,jdbcType=VARCHAR},
+      parent_code = #{parentCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

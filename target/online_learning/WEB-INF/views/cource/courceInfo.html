@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:context="${#request.getContextPath()}">
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <script th:src="@{/static/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/main.css}">
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <script th:src="@{/static/js/cource/courceInfo.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/courceInfo.css}">
+
+    <meta name="getCourceId" th:context="${cource.id}">
+    <!--<meta name="getUserId" th:context="${session.user.id}">-->
+    <title>课程信息</title>
+</head>
+<body>
+<div th:replace="commons/header :: navbar"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5">
+            <img th:src="@{/image/test1.jpg}" alt="...">
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="alert alert-info" id="getCourceName" role="alert" th:utext="${cource.name}">
+                </div>
+                <ol class="breadcrumb">
+                    <li class="active" id="getCourceClassify" th:utext="${cource.classify}">Data</li>
+                </ol>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-primary btn-lg" id="addToMine"> 订阅课程</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

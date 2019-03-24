@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:context="${#request.getContextPath()}">
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <script th:src="@{/static/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <script th:src="@{/static/js/cource/studying-cource.js}"></script>
+    <title>订阅的课程</title>
+</head>
+<body>
+<div th:replace="commons/header :: navbar"></div>
+<input type="hidden" id="get_id" th:value="${session.user.id}">
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-4">
+            <h1>订阅课程</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover" id="cource_table">
+                <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" id="check_all"/>
+                    </th>
+                    <th>#</th>
+                    <th>课程名</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-6" id="page_nav">
+
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function()
+    {
+        var ctx = $("meta[name='ctx']").attr("context");
+        var userId = $("#get_id").val();
+        $.ajax({
+            url: ctx + "/user/getStudyingCource",
+            type: "post",
+            data: {
+                'userId': userId
+            },
+            success: function (result) {
+                build_cource_table(result);
+            }
+        });
+    }
+</script>
+</body>
+</html>

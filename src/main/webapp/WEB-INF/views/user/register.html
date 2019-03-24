@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:context="${#httpServletRequest.getContextPath()}">
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <script th:src="@{/static/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/user/register.js}" th:inline="javascript"></script>
+    <script th:src="@{/static/js/user/utils.js}"></script>
+
+    <title>用户注册</title>
+</head>
+<body>
+<div th:replace="commons/header :: navbar"></div>
+<div class="container">
+    <div class="row">
+        <form id="register-form">
+            <!--用户名-->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
+            </div>
+            <!--&lt;!&ndash;昵称&ndash;&gt;-->
+            <!--<div class="form-group">-->
+                <!--<label for="nickname">Nickname</label>-->
+                <!--<input type="text" class="form-control" id="nickname" name="nickname" placeholder="nickname" />-->
+            <!--</div>-->
+            <!--密码-->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+            </div>
+            <!--重复密码-->
+            <div class="form-group">
+                <label for="repassword">RePassword</label>
+                <input type="password" class="form-control" id="repassword" placeholder="RePassword" />
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-default" onclick="doRegister()">注册</button>
+    </div>
+</div>
+</body>
+</html>

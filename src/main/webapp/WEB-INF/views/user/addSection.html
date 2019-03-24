@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:context="${#request.getContextPath()}">
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <script th:src="@{/static/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <script th:src="@{/static/js/user/utils.js}"></script>
+    <script th:src="@{/static/js/cource/addSection.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <title>添加章节</title>
+</head>
+<body>
+<div th:replace="commons/header :: navbar"></div>
+<input type="hidden" id="getId" th:value="${session.courceId}">
+<div class="container">
+    <form id="sectionFrom" class="form-horizontal">
+        <input type="hidden" name="courseId" th:value="${session.courceId}">
+        <div class="form-group">
+            <label for="inputSection" class="col-sm-2 control-label">章名</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="name" id="inputSection" placeholder="章名" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputSort" class="col-sm-2 control-label">章节号</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="sort" id="inputSort" placeholder="第几章" required="required">
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-sm-offset-10">
+            <button type="submit" class="btn btn-primary" onclick="sectionSave()"> 保存章</button>
+            <button id="addSubSection" class="btn btn-primary" data-toggle="modal" data-target="#myModal" type="button"> 添加节</button>
+        </div>
+    </div>
+
+    <!--模态框添加节-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="subSectionFrom" class="form-horizontal" enctype ="multipart/form-data">
+                        <input type="hidden" name="courseId" th:value="${session.courceId}">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">章名</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="parentSection" name="parentId">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputSubSection" class="col-sm-2 control-label">节名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="name" id="inputSubSection" placeholder="章名" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubSort" class="col-sm-2 control-label">第几节</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="sort" id="inputSubSort" placeholder="第几章" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile" class="col-sm-2 control-label" >视频上传</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="file" id="exampleInputFile" name="video">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveSubSection()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

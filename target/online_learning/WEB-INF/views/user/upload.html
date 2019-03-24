@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:context="${#request.getContextPath()}">
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <script th:src="@{/static/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <script th:src="@{/static/js/cource/upload.js}"></script>
+    <title>课程上传</title>
+    <style>
+        .form-input {
+            width: 35%;
+        }
+        .form-select {
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="commons/header :: navbar"></div>
+<div class="container">
+    <div class="row">
+        <form method="post" enctype="multipart/form-data" id="cource-info">
+            <div class="form-group form-input">
+                <label for="exampleInputName">课程名:</label>
+                <input type="text" class="form-control" id="exampleInputName" name="name" placeholder="课程名">
+            </div>
+            <input type="hidden" id="creater" name="creater" th:value="${session.user.username}">
+
+            <div class="form-group form-select" id="form-select">
+                课程类别:
+                <select class="form-control" name="classify" id="classify_select">
+                    <option value="fe">前端</option>
+                    <option value="be">后端</option>
+                    <option value="db">数据库</option>
+                    <option value="mb">移动开发</option>
+                </select>
+                <select class="form-control" name="subClassify" id="subClassify" style="margin-top: 5px;">
+                </select>
+            </div>
+
+            <div class="form-group form-input">
+                简介: <textarea class="form-control" rows="3" id="introduce" name="introduce"></textarea>
+            </div>
+
+        </form>
+        <button type="submit" class="btn btn-primary" onclick="doUpload()">创建</button>
+    </div>
+</div>
+
+
+</body>
+</html>

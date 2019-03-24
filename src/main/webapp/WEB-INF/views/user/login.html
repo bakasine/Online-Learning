@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:context="${#request.getContextPath()}">
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <script th:src="@{/static/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/login.css}">
+    <script th:src="@{/static/js/user/login.js}" th:inline="javascript"></script>
+    <script th:src="@{/static/js/user/utils.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <title>用户登陆</title>
+</head>
+<body>
+<div th:replace="commons/header :: navbar"></div>
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal" id="form-login">
+            <!--用户名-->
+            <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
+                </div>
+            </div>
+            <!--密码-->
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+                </div>
+            </div>
+            <div class="checkbox">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <input type="checkbox" id="remember" name="remember">Remember Me
+                </div>
+
+                <!--<label>-->
+                <!--<input type="checkbox" id="remember">Remember Me-->
+                <!--</label>-->
+            </div>
+        </form>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" onclick="doLogin()">登陆</button>
+                    <button type="submit" class="btn btn-default" onclick="toRegister()">注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

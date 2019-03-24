@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:context="${#request.getContextPath()}">
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <script th:src="@{/static/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/user/userinfo.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <title>用户信息</title>
+</head>
+<body>
+<div th:replace="commons/header :: navbar"></div>
+<!--<p th:utext="${session.user}"></p>-->
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal" id="info-form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-4">
+                    <p th:utext="${session.user.username}" class="form-control-static"></p>
+                </div>
+                <input type="hidden" name="id" th:value="${session.user.id}">
+            </div>
+            <div class="form-group">
+                <label for="inputNickname" class="col-sm-2 control-label">用户昵称</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="nickname" id="inputNickname" th:value="${session.user.nickname}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">性别</label>
+                <div class="col-sm-4">
+                    <label class="radio-inline">
+                        <input th:checked="${session.user.gender == true}" type="radio" name="gender"
+                               id="inlineRadio1" value="1"> 男
+                    </label>
+                    <label class="radio-inline">
+                        <input th:checked="${session.user.gender == false}" type="radio" name="gender"
+                               id="inlineRadio2" value="0"> 女
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputWechat" class="col-sm-2 control-label">微信</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="wechat" id="inputWechat" th:value="${session.user.wechat}">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="
+        form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" onclick="doChange()">修改信息</button>
+                <button type="submit" class="btn btn-default" onclick="toMain()">回到首页</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</ul>
+</body>
+</html>

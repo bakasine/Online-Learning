@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="ctx" th:context="${#request.getContextPath()}">
+    <meta name="courceId" th:context="${courceId}">
+    <script th:src="@{/static/js/jquery-3.3.1.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css}">
+    <script th:src="@{/static/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/main.css}">
+    <link rel="stylesheet" th:href="@{/static/css/header.css}">
+    <link rel="stylesheet" th:href="@{/static/css/studyCource.css}">
+    <script th:src="@{/static/js/cource/studyCource.js}"></script>
+    <title>视频观看</title>
+</head>
+<body>
+<div th:replace="commons/header :: navbar"></div>
+<!-- 章节-start -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-7 main-course-left">
+            <div class="course-info">
+                <div class="course-title" style="font-size: 24px;"></div>
+
+                <div class="course-video">
+                    <video id="videoNow" src="#" controls width="100%" height="100%" preload>
+                        <source src = "" type = "video/mp4" id = "videoURL">
+                    </video>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 main-course-right" >
+            <h4 class="mt-50">所有章节</h4>
+            <div class="video-course-fix-parent">
+                <div class="video-course-fix" id="video-course-fix">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 章节-end -->
+</body>
+</html>

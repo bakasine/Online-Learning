@@ -1,0 +1,8 @@
+.carousel_boxshadow {
+    border-radius: 4px;
+    box-shadow: 0 2px 8px 0 rgba(7, 17, 27, 0.06);
+    margin-bottom: 20px;
+}
+.caption {
+    text-align: center;
+}
